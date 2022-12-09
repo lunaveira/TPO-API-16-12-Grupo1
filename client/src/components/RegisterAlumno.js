@@ -1,7 +1,47 @@
 import * as React from 'react';
+import Calendario from './Calendario';
+import {Link} from 'react-router-dom';
+import dayjs from 'dayjs';
+import { useState } from 'react';
 
 
 export default function FormPropsTextFields() {
+
+  
+
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [primaria, setPrimaria] = useState("");
+  const [secundaria, setSecundaria] = useState("");
+  const [terciario, setTerciario] = useState("");
+  const [universitario, setUniversitario] = useState("");
+  const [fechaNac, setFechaNac] = useState(dayjs('2022-08-18T21:11:54'));
+
+
+  async function handleSubmit(event){
+      event.preventDefault();
+      const peticion = await fetch('http://localhost:4444/api/register', {method: "POST", headers: {'Content-Type': 'application/json'} , body: JSON.stringify ({
+  
+        nombre: name, 
+        apellido: surname, 
+        email: email, 
+        password: password, 
+        primaria: primaria, 
+        secundaria: secundaria, 
+        terciario: terciario,
+        universitario: universitario,
+        rol: 'alumno' 
+      })})
+      console.log(peticion);
+
+
+  }; 
+
+
+
+
   return (
   
   
@@ -31,10 +71,10 @@ export default function FormPropsTextFields() {
         </div>
 
         <div className="mt-10">
-          <form action="#">
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-col mb-5">
               <label
-                for="email"
+                for="name"
                 className="mb-1 text-xs tracking-wide text-gray-600"
                 >Name:</label
               >
@@ -57,9 +97,14 @@ export default function FormPropsTextFields() {
 
 
                 <input
-                  id="email"
-                  type="email"
-                  name="email"
+                  id="name"
+                  type="name"
+                  name="name"
+                  value={name}
+                  onChange={ function (event){
+                    setName(event.target.value);
+                  }}
+
                   className="
                     text-sm
                     placeholder-gray-500
@@ -79,7 +124,7 @@ export default function FormPropsTextFields() {
 
             <div className="flex flex-col mb-5">
               <label
-                for="email"
+                for="surname"
                 className="mb-1 text-xs tracking-wide text-gray-600"
                 >Surname:</label
               >
@@ -102,9 +147,13 @@ export default function FormPropsTextFields() {
 
 
                 <input
-                  id="email"
-                  type="email"
-                  name="email"
+                  id="surname"
+                  type="surname"
+                  name="surname"
+                  value={surname}
+                  onChange={ function (event){
+                    setSurname(event.target.value);
+                  }}
                   className="
                     text-sm
                     placeholder-gray-500
@@ -149,6 +198,10 @@ export default function FormPropsTextFields() {
                   id="email"
                   type="email"
                   name="email"
+                  value={email}
+                  onChange={ function (event){
+                    setEmail(event.target.value);
+                  }}
                   className="
                     text-sm
                     placeholder-gray-500
@@ -193,6 +246,10 @@ export default function FormPropsTextFields() {
                   id="password"
                   type="password"
                   name="password"
+                  value={password}
+                  onChange={ function (event){
+                    setPassword(event.target.value);
+                  }}
                   className="
                     text-sm
                     placeholder-gray-500
@@ -209,7 +266,206 @@ export default function FormPropsTextFields() {
               </div>
             </div>
 
-            
+
+            <div className="flex flex-col mb-5">
+              <label
+                for="primaria"
+                className="mb-1 text-xs tracking-wide text-gray-600"
+                >Primario:</label
+              >
+              <div className="relative">
+                <div
+                  className="
+                    inline-flex
+                    items-center
+                    justify-center
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-10
+                    text-gray-400
+                  "
+                >
+                  <i className="fas fa-at text-blue-500"></i>
+                </div>
+
+                <input
+                  id="primaria"
+                  type="primaria"
+                  name="primaria"
+                  value={primaria}
+                  onChange={ function (event){
+                    setPrimaria(event.target.value);
+                  }}
+                  className="
+                    text-sm
+                    placeholder-gray-500
+                    pl-10
+                    pr-4
+                    rounded-2xl
+                    border border-gray-400
+                    w-full
+                    py-2
+                    focus:outline-none focus:border-blue-400
+                  "
+                  placeholder="Indica si terminado o en curso"
+                />
+              </div>
+            </div>
+
+
+            <div className="flex flex-col mb-5">
+              <label
+                for="secundaria"
+                className="mb-1 text-xs tracking-wide text-gray-600"
+                >Secundario:</label
+              >
+              <div className="relative">
+                <div
+                  className="
+                    inline-flex
+                    items-center
+                    justify-center
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-10
+                    text-gray-400
+                  "
+                >
+                  <i className="fas fa-at text-blue-500"></i>
+                </div>
+
+                <input
+                  id="secundaria"
+                  type="secundaria"
+                  name="secundaria"
+                  value={secundaria}
+                  onChange={ function (event){
+                    setSecundaria(event.target.value);
+                  }}
+                  className="
+                    text-sm
+                    placeholder-gray-500
+                    pl-10
+                    pr-4
+                    rounded-2xl
+                    border border-gray-400
+                    w-full
+                    py-2
+                    focus:outline-none focus:border-blue-400
+                  "
+                  placeholder="Indica si terminado o en curso"
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col mb-5">
+              <label
+                for="terciario"
+                className="mb-1 text-xs tracking-wide text-gray-600"
+                >Terciario:</label
+              >
+              <div className="relative">
+                <div
+                  className="
+                    inline-flex
+                    items-center
+                    justify-center
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-10
+                    text-gray-400
+                  "
+                >
+                  <i className="fas fa-at text-blue-500"></i>
+                </div>
+
+                <input
+                  id="terciario"
+                  type="terciario"
+                  name="terciario"
+                  value={terciario}
+                  onChange={ function (event){
+                    setTerciario(event.target.value);
+                  }}
+                  className="
+                    text-sm
+                    placeholder-gray-500
+                    pl-10
+                    pr-4
+                    rounded-2xl
+                    border border-gray-400
+                    w-full
+                    py-2
+                    focus:outline-none focus:border-blue-400
+                  "
+                  placeholder="Indica si terminado o en curso"
+                />
+              </div>
+            </div>
+
+
+            <div className="flex flex-col mb-5">
+              <label
+                for="universitario"
+                className="mb-1 text-xs tracking-wide text-gray-600"
+                >Universitario:</label
+              >
+              <div className="relative">
+                <div
+                  className="
+                    inline-flex
+                    items-center
+                    justify-center
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-10
+                    text-gray-400
+                  "
+                >
+                  <i className="fas fa-at text-blue-500"></i>
+                </div>
+
+                <input
+                  id="universitario"
+                  type="universitario"
+                  name="universitario"
+                  value={universitario}
+                  onChange={ function (event){
+                    setUniversitario(event.target.value);
+                  }}
+                  className="
+                    text-sm
+                    placeholder-gray-500
+                    pl-10
+                    pr-4
+                    rounded-2xl
+                    border border-gray-400
+                    w-full
+                    py-2
+                    focus:outline-none focus:border-blue-400
+                  "
+                  placeholder="Indica si terminado o en curso"
+                />
+              </div>
+            </div>
+
+
+            <div className="flex flex-col mb-5">
+              <label
+                for="fechaNac"
+                className="mb-1 text-xs tracking-wide text-gray-600"
+                >Fecha de nacimiento:</label
+              >
+              <Calendario/>
+            </div>
 
             <div className="flex w-full">
               <button
@@ -250,7 +506,37 @@ export default function FormPropsTextFields() {
                 </span>
               </button>
             </div>
+
+            
+
           </form>
+
+          <div className="flex w-full">
+              <Link to="/" ><button
+                type="submit"
+                className="
+                  flex
+                  mt-2
+                  items-right
+                  justify-right
+                  focus:outline-none
+                  sm:text-base
+                  rounded-2xl
+                  py-2
+                  w-full
+                  transition
+                  duration-150
+                  ease-in
+                  
+                "
+              >
+                <span className="mr-2 uppercase text-blue-600 ">Cancel</span>
+                <span>
+                  
+                </span>
+              </button>
+              </Link>
+            </div>
         </div>
       </div>
       <div className="flex justify-center items-center mt-6">
@@ -268,7 +554,7 @@ export default function FormPropsTextFields() {
           <span className="ml-2"
             >You have an account?
             <a
-              href="#"
+              href="/login"
               className="text-xs ml-2 text-indigo-500 font-semibold"
               >Login here</a
             ></span

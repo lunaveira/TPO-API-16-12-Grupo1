@@ -1,4 +1,4 @@
-
+import {Link} from 'react-router-dom';
 
 export default function FormPropsTextFields() {
     return (
@@ -252,6 +252,33 @@ export default function FormPropsTextFields() {
                   </span>
                 </button>
               </div>
+
+              <div className="flex w-full">
+              <Link to="/" ><button
+                type="submit"
+                className="
+                  flex
+                  mt-2
+                  items-right
+                  justify-right
+                  focus:outline-none
+                  sm:text-base
+                  rounded-2xl
+                  py-2
+                  w-full
+                  transition
+                  duration-150
+                  ease-in
+                  
+                "
+              >
+                <span className="mr-2 uppercase text-blue-600 ">Cancel</span>
+                <span>
+                  
+                </span>
+              </button>
+              </Link>
+            </div>
             </form>
           </div>
         </div>

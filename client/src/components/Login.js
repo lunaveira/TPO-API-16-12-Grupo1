@@ -1,12 +1,33 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import {Link} from 'react-router-dom';
+import { useState } from 'react';
 
 export default function FormPropsTextFields() {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+
+
+  async function handleSubmit(event){
+      event.preventDefault();
+      const peticion = await fetch('http://localhost:4444/api/login', {method: "POST", headers: {'Content-Type': 'application/json'} , body: JSON.stringify ({
+  
+ 
+        email: email, 
+        password: password, 
+     
+      })})
+      console.log(peticion);
+
+  }; 
+
   return (
+   
     <div
       className="min-h-screen flex flex-col items-center justify-center bg-gray-100"
     >
+      
       <div
         className="
           flex flex-col
@@ -22,6 +43,7 @@ export default function FormPropsTextFields() {
           max-w-md
         "
       >
+        
         <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
           Welcome Back
         </div>
@@ -30,7 +52,7 @@ export default function FormPropsTextFields() {
         </div>
 
         <div className="mt-10">
-          <form action="#">
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-col mb-5">
               <label
                 for="email"
@@ -58,6 +80,11 @@ export default function FormPropsTextFields() {
                   id="email"
                   type="email"
                   name="email"
+                  value={email}
+                  onChange={ function (event){
+                    setEmail(event.target.value);
+                  }}
+
                   className="
                     text-sm
                     placeholder-gray-500
@@ -102,6 +129,10 @@ export default function FormPropsTextFields() {
                   id="password"
                   type="password"
                   name="password"
+                  value={password}
+                  onChange={ function (event){
+                    setPassword(event.target.value);
+                  }}
                   className="
                     text-sm
                     placeholder-gray-500
@@ -159,9 +190,40 @@ export default function FormPropsTextFields() {
                 </span>
               </button>
             </div>
+
           </form>
+
+          <div className="flex w-full">
+              <Link to="/" ><button
+                type="submit"
+                className="
+                  flex
+                  mt-2
+                  items-right
+                  justify-right
+                  focus:outline-none
+                  sm:text-base
+                  rounded-2xl
+                  py-2
+                  w-full
+                  transition
+                  duration-150
+                  ease-in
+                  
+                "
+              >
+                <span className="mr-2 uppercase text-blue-600 ">Cancel</span>
+                <span>
+                  
+                </span>
+              </button>
+              </Link>
+            </div>
         </div>
       </div>
+
+
+      
       <div className="flex justify-center items-center mt-6">
         <a
           href="#"
@@ -177,7 +239,7 @@ export default function FormPropsTextFields() {
           <span className="ml-2"
             >You don't have an account?
             <a
-              href="#"
+              href="/elegir-rol"
               className="text-xs ml-2 text-indigo-500 font-semibold"
               >Register now</a
             ></span

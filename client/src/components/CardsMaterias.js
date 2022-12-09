@@ -15,6 +15,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import {Link} from 'react-router-dom';
+import CardComentarios from './CardComentarios';
 
 
 
@@ -42,7 +43,7 @@ export default function RecipeReviewCard(props) {
     
         avatar={
           <Avatar sx={{ bgcolor: blueGrey[500] }} aria-label="recipe">
-            <img className="w-full h-full object-cover" src = {props.avatar} />
+            <img className="w-full h-full object-cover" src = {props.avatar} alt="avatar" />
           </Avatar>
         }
 
@@ -95,10 +96,14 @@ export default function RecipeReviewCard(props) {
           {props.comentarios.map(function (comentario){
             return (
 
+              <CardComentarios nombre={comentario.nombre} imagen={comentario.imagen}
+              fecha={comentario.fecha} comentario={comentario.comentario}
+
+              />
+
              
 
-              <p>{comentario.comentario}</p>
-
+            
             )
         
           }

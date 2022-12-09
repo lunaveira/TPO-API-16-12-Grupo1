@@ -1,9 +1,33 @@
 import * as React from 'react';
-
+import {Link} from 'react-router-dom';
+import { useState } from 'react';
 
 export default function FormPropsTextFields() {
-  return (
+
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [titulo, setTitulo] = useState("");
+  const [experiencia, setExperiencia] = useState("");
+
+
+  async function handleSubmit(event){
+      event.preventDefault();
+      const peticion = await fetch('http://localhost:4444/api/register', {method: "POST", headers: {'Content-Type': 'application/json'} , body: JSON.stringify ({
   
+        nombre: name, 
+        apellido: surname, 
+        email: email, 
+        password: password, 
+        titulo: titulo, 
+        experiencia: experiencia, 
+        rol: 'profesor' 
+      })})
+      console.log(peticion);
+  }; 
+
+  return (
   
     <div
       className="min-h-screen flex flex-col items-center justify-center bg-gray-100"
@@ -31,7 +55,7 @@ export default function FormPropsTextFields() {
         </div>
 
         <div className="mt-10">
-          <form action="#">
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-col mb-5">
               <label
                 for="email"
@@ -57,9 +81,13 @@ export default function FormPropsTextFields() {
 
 
                 <input
-                  id="email"
-                  type="email"
-                  name="email"
+                  id="name"
+                  type="name"
+                  name="name"
+                  value={name}
+                  onChange={ function (event){
+                    setName(event.target.value);
+                  }}
                   className="
                     text-sm
                     placeholder-gray-500
@@ -102,9 +130,13 @@ export default function FormPropsTextFields() {
 
 
                 <input
-                  id="email"
-                  type="email"
-                  name="email"
+                  id="surname"
+                  type="surname"
+                  name="surname"
+                  value={surname}
+                  onChange={ function (event){
+                    setSurname(event.target.value);
+                  }}
                   className="
                     text-sm
                     placeholder-gray-500
@@ -149,6 +181,10 @@ export default function FormPropsTextFields() {
                   id="email"
                   type="email"
                   name="email"
+                  value={email}
+                  onChange={ function (event){
+                    setEmail(event.target.value);
+                  }}
                   className="
                     text-sm
                     placeholder-gray-500
@@ -193,6 +229,10 @@ export default function FormPropsTextFields() {
                   id="password"
                   type="password"
                   name="password"
+                  value={password}
+                  onChange={ function (event){
+                    setPassword(event.target.value);
+                  }}
                   className="
                     text-sm
                     placeholder-gray-500
@@ -205,6 +245,102 @@ export default function FormPropsTextFields() {
                     focus:outline-none focus:border-blue-400
                   "
                   placeholder="Enter your password"
+                />
+              </div>
+            </div>
+
+
+            <div className="flex flex-col mb-5">
+              <label
+                for="titulo"
+                className="mb-1 text-xs tracking-wide text-gray-600"
+                >Titulo:</label
+              >
+              <div className="relative">
+                <div
+                  className="
+                    inline-flex
+                    items-center
+                    justify-center
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-10
+                    text-gray-400
+                  "
+                >
+                  <i className="fas fa-at text-blue-500"></i>
+                </div>
+
+                <input
+                  id="titulo"
+                  type="titulo"
+                  name="titulo"
+                  value={titulo}
+                  onChange={ function (event){
+                    setTitulo(event.target.value);
+                  }}
+                  className="
+                    text-sm
+                    placeholder-gray-500
+                    pl-10
+                    pr-4
+                    rounded-2xl
+                    border border-gray-400
+                    w-full
+                    py-2
+                    focus:outline-none focus:border-blue-400
+                  "
+                  placeholder="Ingresa si tenes un titulo"
+                />
+              </div>
+            </div>
+
+
+            <div className="flex flex-col mb-5">
+              <label
+                for="experiencia"
+                className="mb-1 text-xs tracking-wide text-gray-600"
+                >Experiencia:</label
+              >
+              <div className="relative">
+                <div
+                  className="
+                    inline-flex
+                    items-center
+                    justify-center
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-10
+                    text-gray-400
+                  "
+                >
+                  <i className="fas fa-at text-blue-500"></i>
+                </div>
+
+                <input
+                  id="experiencia"
+                  type="experiencia"
+                  name="experiencia"
+                  value={experiencia}
+                  onChange={ function (event){
+                    setExperiencia(event.target.value);
+                  }}
+                  className="
+                    text-sm
+                    placeholder-gray-500
+                    pl-10
+                    pr-4
+                    rounded-2xl
+                    border border-gray-400
+                    w-full
+                    py-2
+                    focus:outline-none focus:border-blue-400
+                  "
+                  placeholder="Experiencia laboral"
                 />
               </div>
             </div>
@@ -250,7 +386,37 @@ export default function FormPropsTextFields() {
                 </span>
               </button>
             </div>
+
+           
+
           </form>
+
+          <div className="flex w-full">
+              <Link to="/" ><button
+                className="
+                  flex
+                  mt-2
+                  items-right
+                  justify-right
+                  focus:outline-none
+                  sm:text-base
+                  rounded-2xl
+                  py-2
+                  w-full
+                  transition
+                  duration-150
+                  ease-in
+                  
+                "
+              >
+                <span className="mr-2 uppercase text-blue-600 ">Cancel</span>
+                <span>
+                  
+                </span>
+              </button>
+              </Link>
+            </div>
+
         </div>
       </div>
       <div className="flex justify-center items-center mt-6">
@@ -268,7 +434,7 @@ export default function FormPropsTextFields() {
           <span className="ml-2"
             >You have an account?
             <a
-              href="#"
+              href="/login"
               className="text-xs ml-2 text-indigo-500 font-semibold"
               >Login here</a
             ></span

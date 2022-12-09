@@ -1,19 +1,10 @@
-import ButtonAppBar from "../components/Navegador";
+
 
 import RecipeReviewCard from "../components/CardsMaterias";
-
-import { useState } from "react";
-
-import Login from "../components/Login";
-
-import Register from "../components/RegisterProfesor";
-
-import FormPropsTextFields from "../components/FormContratarClase";
 import Bienvenida from "../components/CardBienvenida";
+import Filtros2 from "../components/Filtros2";
 import Filtros from "../components/Filtros";
 
-import ElegirRol from "../components/ElegirRol";
-import Filtros2 from "../components/Filtros2";
 
 
 
@@ -36,17 +27,17 @@ export function Home() {
             avatar: 'https://img.freepik.com/foto-gratis/retrato-joven-sonriente-gafas_171337-4842.jpg?w=2000',
             imagenClase: 'https://www.eltiempo.com/files/image_640_428/uploads/2021/12/06/61ae7abe0ad7b.jpeg',
             comentarios:[{
-                nombre: 'anita',
+                nombre: 'Juana Gomez',
                 imagen: 'https://img.freepik.com/foto-gratis/retrato-joven-sonriente-gafas_171337-4842.jpg?w=2000',
                 fecha: '02-12-2022',
-                comentario: 'loren ipsum'
+                comentario: 'Logre comprender todos los conceptos'
 
             },
             {
-                nombre: 'anita',
+                nombre: 'Paula Farias',
                 imagen: 'https://img.freepik.com/foto-gratis/retrato-joven-sonriente-gafas_171337-4842.jpg?w=2000',
                 fecha: '02-12-2022',
-                comentario: 'loren ipsum'
+                comentario: 'Hizo que me gusten las matematicas!'
 
             }],
             tipoClase: 'grupal',
@@ -64,17 +55,17 @@ export function Home() {
             avatar:'https://estudiantes.ucontinental.edu.pe/wp-content/uploads/2020/09/Madurez-emocional-7.jpg',
             imagenClase: 'https://www.magisnet.com/wp-content/uploads/2020/11/ingle%CC%81s.jpg',
             comentarios:[{
-                nombre: 'anita',
+                nombre: 'Ana Lopez',
                 imagen: 'https://img.freepik.com/foto-gratis/retrato-joven-sonriente-gafas_171337-4842.jpg?w=2000',
                 fecha: '02-12-2022',
-                comentario: 'loren ipsum'
+                comentario: 'Me gusto mucho esta clase'
 
             },
             {
-                nombre: 'anita',
+                nombre: 'Pedro Suarez',
                 imagen: 'https://img.freepik.com/foto-gratis/retrato-joven-sonriente-gafas_171337-4842.jpg?w=2000',
                 fecha: '02-12-2022',
-                comentario: 'loren ipsum'
+                comentario: 'Muy buen profesor'
 
             }],
             tipoClase: 'individual',
@@ -91,17 +82,17 @@ export function Home() {
             avatar:'https://st3.depositphotos.com/1037473/18812/i/450/depositphotos_188121446-stock-photo-in-the-library-pretty-female.jpg',
             imagenClase: 'https://prod-discovery.edx-cdn.org/media/programs/card_images/a11c408f-0986-4393-8268-8bc16500cdf3-db87df485d12.jpg',
             comentarios:[{
-                nombre: 'anita',
+                nombre: 'Matias Martinez',
                 imagen: 'https://img.freepik.com/foto-gratis/retrato-joven-sonriente-gafas_171337-4842.jpg?w=2000',
                 fecha: '02-12-2022',
-                comentario: 'loren ipsum'
+                comentario: 'Pude entender todos los temas que necesitaba'
 
             },
             {
-                nombre: 'anita',
+                nombre: 'Lola Fernandez',
                 imagen: 'https://img.freepik.com/foto-gratis/retrato-joven-sonriente-gafas_171337-4842.jpg?w=2000',
                 fecha: '02-12-2022',
-                comentario: 'loren ipsum'
+                comentario: 'Las explicaciones son muy claras!'
 
             }],
             tipoClase: 'grupal',
@@ -118,17 +109,17 @@ export function Home() {
             avatar:'https://st3.depositphotos.com/1037473/18812/i/450/depositphotos_188121446-stock-photo-in-the-library-pretty-female.jpg',
             imagenClase: 'https://prod-discovery.edx-cdn.org/media/programs/card_images/a11c408f-0986-4393-8268-8bc16500cdf3-db87df485d12.jpg',
             comentarios:[{
-                nombre: 'pedro',
+                nombre: 'Pablo Perez',
                 imagen: 'https://img.freepik.com/foto-gratis/retrato-joven-sonriente-gafas_171337-4842.jpg?w=2000',
                 fecha: '02-12-2022',
-                comentario: 'loren ipsum'
+                comentario: 'Me gusto mucho aprender cosas nuevas'
 
             },
             {
-                nombre: 'juan',
+                nombre: 'Juan Gonzalez',
                 imagen: 'https://img.freepik.com/foto-gratis/retrato-joven-sonriente-gafas_171337-4842.jpg?w=2000',
                 fecha: '02-12-2022',
-                comentario: 'loren ipsum'
+                comentario: 'Clases super entretenidas!'
 
             }],
             tipoClase: 'individual',
@@ -197,7 +188,7 @@ export function Home() {
 
          <Bienvenida></Bienvenida>
 
-        <Filtros2></Filtros2>
+        <Filtros/>
 
        
     
