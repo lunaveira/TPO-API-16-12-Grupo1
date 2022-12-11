@@ -76,9 +76,11 @@ export default function RecipeReviewCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <Link to="/contratar-clases"><AddShoppingCartIcon /></Link>
+        <IconButton aria-label="contratar clase">
+        {props.alumno == true?  <Link to="/contratar-clases"><AddShoppingCartIcon  /></Link> : null}
+         
         </IconButton>
+       
        
         <ExpandMore
           expand={expanded}

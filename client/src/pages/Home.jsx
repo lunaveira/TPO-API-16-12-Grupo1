@@ -195,7 +195,7 @@ export function Home() {
         <div className=" flex gap-4  flex-wrap justify-center p-5 absolute" >
         {clases.map(function (clase){
             return(
-                <RecipeReviewCard 
+                <RecipeReviewCard alumno={false}
                 descripcion = {clase.descripcion} materia={clase.materia} 
                 profesor={clase.profesor} tipoClase={clase.tipoClase} 
                 frecuencia={clase.frecuencia} calificacion={clase.calificacion}
