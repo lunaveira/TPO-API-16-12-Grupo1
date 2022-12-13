@@ -1,24 +1,59 @@
 import * as React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 
-export default function FormPropsTextFields() {
+import jwtDecode from 'jwt-decode';
+
+export default function FormPropsTextFields(props) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
 
 
   async function handleSubmit(event){
       event.preventDefault();
       const peticion = await fetch('http://localhost:4444/api/login', {method: "POST", headers: {'Content-Type': 'application/json'} , body: JSON.stringify ({
+
   
  
         email: email, 
         password: password, 
      
       })})
-      console.log(peticion);
+    
+      
+      const jsonRes = await peticion.json();
+      localStorage.setItem('token.tusClases', jsonRes.token );
+      const tokenDecode = jwtDecode(jsonRes.token);
+      
+      
+
+      if(jsonRes.token) {
+
+        const peticion2 = await fetch('http://localhost:4444/api/usuarios/'+ tokenDecode.user.id);
+        const peticionDecode = await peticion2.json();
+
+        props.setRol(peticionDecode.userByID.rol);
+
+        if(peticionDecode.userByID.rol == 'alumno') {
+
+          navigate('/')
+
+        } else if (peticionDecode.userByID.rol == 'profesor') {
+
+          navigate('/dashboard-profesor')
+
+        }
+
+       
+      }
+
+
+      
+      
 
   }; 
 

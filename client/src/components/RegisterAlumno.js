@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Calendario from './Calendario';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 
 
-export default function FormPropsTextFields() {
+export default function FormPropsTextFields(props) {
 
   
 
@@ -18,6 +18,8 @@ export default function FormPropsTextFields() {
   const [terciario, setTerciario] = useState("");
   const [universitario, setUniversitario] = useState("");
   const [fechaNac, setFechaNac] = useState(dayjs('2022-08-18T21:11:54'));
+
+  const navigate = useNavigate();
 
 
   async function handleSubmit(event){
@@ -32,13 +34,23 @@ export default function FormPropsTextFields() {
         secundaria: secundaria, 
         terciario: terciario,
         universitario: universitario,
+        fechaNac: fechaNac,
         rol: 'alumno' 
       })})
+
+      const jsonRes = await peticion.json();
+      localStorage.setItem('token.tusClases', jsonRes.token );
+
+      if(jsonRes.token) {
+
+        navigate('/login');
+
+        
+      }
+
       console.log(peticion);
 
-
   }; 
-
 
 
 
@@ -464,7 +476,7 @@ export default function FormPropsTextFields() {
                 className="mb-1 text-xs tracking-wide text-gray-600"
                 >Fecha de nacimiento:</label
               >
-              <Calendario/>
+              <Calendario fechaNac={fechaNac} setFechaNac={setFechaNac}/>
             </div>
 
             <div className="flex w-full">

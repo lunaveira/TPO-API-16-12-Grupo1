@@ -38,6 +38,10 @@ export default function RecipeReviewCard(props) {
   };
 
   return (
+    <p>hola</p>
+  )
+
+  return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
     
@@ -52,13 +56,13 @@ export default function RecipeReviewCard(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={props.nombreClase}
+        title={props.nombre}
         subheader={props.materia}
       />
       <CardMedia
         component="img"
         height="194"
-        image={props.imagenClase}
+       // image={props.imagenClase}
         alt="clases particulares"
       />
       <CardContent>
@@ -77,7 +81,7 @@ export default function RecipeReviewCard(props) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="contratar clase">
-        {props.alumno == true?  <Link to="/contratar-clases"><AddShoppingCartIcon  /></Link> : null}
+        {props.rol == 'alumno' && <Link to="/contratar-clases"><AddShoppingCartIcon  /></Link> }
          
         </IconButton>
        

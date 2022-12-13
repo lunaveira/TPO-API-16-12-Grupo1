@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 
-export default function FormPropsTextFields() {
+export default function FormPropsTextFields(props) {
 
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
@@ -10,6 +10,8 @@ export default function FormPropsTextFields() {
   const [password, setPassword] = useState("");
   const [titulo, setTitulo] = useState("");
   const [experiencia, setExperiencia] = useState("");
+
+  const navigate = useNavigate();
 
 
   async function handleSubmit(event){
@@ -24,6 +26,15 @@ export default function FormPropsTextFields() {
         experiencia: experiencia, 
         rol: 'profesor' 
       })})
+
+      const jsonRes = await peticion.json();
+      localStorage.setItem('token.tusClases', jsonRes.token );
+
+      if(jsonRes.token) {
+
+        navigate('/login');
+      }
+
       console.log(peticion);
   }; 
 

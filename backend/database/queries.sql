@@ -18,6 +18,7 @@ CREATE TABLE clases(
   idProfesor int references users(id),
   costo money,
   descripcion varchar(250),
+  tipoClase varchar(50),
   id serial primary key
 
 );
@@ -52,4 +53,11 @@ CREATE TABLE profesor(
     experiencia varchar(50),
     idUser int references users(id)
 );
+
+CREATE TABLE clasesContratadas(
+  id serial primary key,
+  idClase int references clases(id),
+  idAlumno int references alumno(id),
+  
+)
 
