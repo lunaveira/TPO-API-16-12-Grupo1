@@ -22,6 +22,9 @@ import ElegirRol from "../src/components/ElegirRol";
 import FormPropsTextFields from "../src/components/FormContratarClase";
 
 import jwtDecode from "jwt-decode";
+import ListaMisClases from "./components/ListaMisClases";
+
+import MiPerfil from "./components/MiPerfil";
 
 
 
@@ -96,6 +99,9 @@ function App() {
   
         <Route path="/dashboard-profesor" element={<DashboardProfesor/>} />
         <Route path="/dashboard-alumno" element={<DashboardAlumno/>} />
+
+        <Route path="/mis-clases" element={<ListaMisClases/>} />
+        <Route path="/mi-perfil" element={<MiPerfil/>} />
 
         
       </Routes>

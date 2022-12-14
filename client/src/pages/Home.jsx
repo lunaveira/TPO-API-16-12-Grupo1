@@ -9,8 +9,8 @@ import { useEffect, useState } from "react";
 
 
 
-export function Home(props) {
 
+export function Home(props) {
     const[clases, setClases] = useState([]);
 
     async function peticion(){
@@ -27,30 +27,29 @@ export function Home(props) {
         
 
     }, [])
-
-    
-
-
     
     return (
         <>
-
-
-         <Bienvenida></Bienvenida>
+        <Bienvenida></Bienvenida>
 
         <Filtros/>
+
+
+        
 
        
     
         <div className=" flex gap-4  flex-wrap justify-center p-5 absolute" >
-        { clases != "" && clases.map(function (clase){
+        {clases != "" && clases.map(function (clase){
+            console.log(clase)
+
             return(
                 <RecipeReviewCard rol={props.rol}
                 descripcion = {clase.descripcion} materia={clase.materia} 
-                profesor={clase.profesor} tipoClase={clase.tipoClase} 
-                frecuencia={clase.frecuencia} calificacion={clase.calificacion}
+                profesor={clase.profesor} usuario={clase.user} tipoClase={clase.tipoClase} 
+                frecuencia={clase.frecuencia} calificaciones={clase.calificaciones}
                 comentarios={clase.comentarios} duracion={clase.duracion}
-                nombreClase={clase.nombreClase} imagenClase={clase.imagenClase}
+                nombreClase={clase.nombre} imagenClase={clase.imagenClase}
                 avatar={clase.avatar} costo={clase.costo}  ></RecipeReviewCard>
             )
         })}

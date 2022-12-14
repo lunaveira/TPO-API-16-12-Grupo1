@@ -38,10 +38,6 @@ export default function RecipeReviewCard(props) {
   };
 
   return (
-    <p>hola</p>
-  )
-
-  return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
     
@@ -56,8 +52,9 @@ export default function RecipeReviewCard(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={props.nombre}
+        title={props.nombreClase}
         subheader={props.materia}
+        
       />
       <CardMedia
         component="img"
@@ -66,17 +63,32 @@ export default function RecipeReviewCard(props) {
         alt="clases particulares"
       />
       <CardContent>
+      <Typography variant="body2" color="text.secondary">
+          Profesor: {props.usuario?.nombre} {props.usuario?.apellido}
+        </Typography>
+
+        <Typography variant="body2" color="text.secondary">
+          Titulo profesor: {props.profesor?.titulo} 
+        </Typography>
+
+        <Typography variant="body2" color="text.secondary">
+          Experiencia profesor: {props.profesor?.experiencia} 
+        </Typography>
+
+
         <Typography variant="body2" color="text.secondary">
           Frecuencia: {props.frecuencia}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Duracion: {props.duracion}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Calificaciones: {props.calificacion}
-        </Typography>
+      
         <Typography variant="body2" color="text.secondary">
           Costo: {props.costo}
+        </Typography>
+
+        <Typography variant="body2" color="text.secondary">
+          Descripcion: {props.descripcion}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -102,7 +114,7 @@ export default function RecipeReviewCard(props) {
           {props.comentarios.map(function (comentario){
             return (
 
-              <CardComentarios nombre={comentario.nombre} imagen={comentario.imagen}
+              <CardComentarios calificacion={props.calificaciones.find(function(calificacion) { return calificacion.iduser === comentario.iduser })} nombre={comentario.nombre} imagen={comentario.imagen}
               fecha={comentario.fecha} comentario={comentario.comentario}
 
               />

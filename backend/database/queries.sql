@@ -10,17 +10,15 @@ CREATE TABLE users(
 
 
 CREATE TABLE clases(
-   
   nombre varchar(50),
   materia varchar(50),
   frecuencia varchar(50),
   duracion int, 
-  idProfesor int references users(id),
+  idProfesor int references profesor(id),
   costo money,
   descripcion varchar(250),
   tipoClase varchar(50),
   id serial primary key
-
 );
 
 CREATE TABLE calificacion(
@@ -52,6 +50,7 @@ CREATE TABLE profesor(
     titulo varchar(50),
     experiencia varchar(50),
     idUser int references users(id)
+
 );
 
 CREATE TABLE clasesContratadas(

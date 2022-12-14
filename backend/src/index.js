@@ -125,19 +125,27 @@ servidor.get('/api/usuarios/:id', async function(req, res){
 })
 
 servidor.get('/api/clases', async function(req, res){
-
     try {
-        
         const clases = await pool.query('SELECT * FROM clases');
-        const comentarios = await pool.query('SELECT * FROM comentario WHERE idClase = $1');
-        const calificaciones = await pool.query('SELECT * FROM calificacion WHERE idClase = $1');
-        res.json({clases: clases.rows, comentarios: comentarios.rows, calificaciones: calificaciones.rows})
-      
-      
+
+        for (let index = 0; index < clases.rows.length; index++) {
+            let clase = clases.rows[index];
+
+            const traerComentarios = await pool.query('SELECT * FROM comentario WHERE idClase = $1', [clases.rows[index].id]);
+            const traerCalificaciones = await pool.query('SELECT * FROM calificacion WHERE idClase = $1', [clases.rows[index].id]);
+            const traerProfesor = await pool.query('SELECT * FROM profesor WHERE id = $1', [clases.rows[index].idprofesor]);
+            const traerUser = traerProfesor.rows != "" && await pool.query('SELECT * FROM users WHERE id = $1', [traerProfesor.rows[0].iduser]);
+
+            clase.comentarios = traerComentarios.rows;
+            clase.calificaciones = traerCalificaciones.rows;
+            clase.profesor = traerProfesor.rows[0];
+            if (traerUser) clase.user = traerUser.rows[0];
+        }
+
+        res.json({ clases: clases.rows });
     } catch(error) {
         res.status(500).send();
     }
-
 })
 
 
