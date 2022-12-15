@@ -1,9 +1,13 @@
 import BasicSelect from "./SelectEstadoClase";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FormHacerComentario from "./FormHacerComentario";
 import BasicRating from "./Calificar";
 
-export default function ListaMisClases() {
+export default function ListaMisClases(props) {
+    useEffect(() => {
+      console.log(props.user);
+    }, [props.user])
+
 
     const [isOpen, setIsOpen]= useState(false);
 

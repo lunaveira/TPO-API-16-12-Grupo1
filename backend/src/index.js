@@ -4,6 +4,7 @@ const pool = require('../database/database');
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 const { json } = require('express');
+const sgMail = require('@sendgrid/mail');
 
 
 const servidor = express();
@@ -103,26 +104,28 @@ servidor.get('/api/usuarios/:id', async function(req, res){
         let userByID = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
         userByID = userByID.rows[0];
         let profeOAlumno = null;
+        let clases = null;
 
-        if(userByID.rol == 'profesor') {
+        if (userByID.rol == 'profesor') {
             profeOAlumno = await pool.query('SELECT * FROM profesor WHERE idUser = $1', [userByID.id])
-
+            clases = await pool.query('SELECT * FROM clases WHERE idProfesor = $1', [profeOAlumno.rows[0].id]);
         } else if(userByID.rol == 'alumno') {
-            profeOAlumno = await pool.query('SELECT * FROM alumno WHERE idUser = $1', [userByID.id])
+            profeOAlumno = await pool.query('SELECT * FROM alumno WHERE idUser = $1', [userByID.id]);
+            clases = await pool.query('SELECT * FROM clases_contratadas WHERE idAlumno = $1', [profeOAlumno.rows[0].id]);
 
+            for (let i = 0; i < clases.rows.length; i++) {
+                const fetchProfesor = await pool.query('SELECT * FROM profesor WHERE id = $1', [clases.rows[i].idprofesor])
+                const fetchClase = await pool.query('SELECT * FROM clases WHERE id = $1', [clases.rows[i].idclase])
+                clases.rows[i].profesor = fetchProfesor.rows[0]
+                clases.rows[i].clase = fetchClase.rows[0]
+            }
         }
 
-        res.json({userByID, profeOAlumno: profeOAlumno.rows[0]});
-
-
-
+        res.json({ userByID, profeOAlumno: profeOAlumno.rows[0], clases: clases.rows });
     } catch(error) {
         res.status(500).send();
     }
-
-    
-
-})
+});
 
 servidor.get('/api/clases', async function(req, res){
     try {
@@ -136,9 +139,17 @@ servidor.get('/api/clases', async function(req, res){
             const traerProfesor = await pool.query('SELECT * FROM profesor WHERE id = $1', [clases.rows[index].idprofesor]);
             const traerUser = traerProfesor.rows != "" && await pool.query('SELECT * FROM users WHERE id = $1', [traerProfesor.rows[0].iduser]);
 
+            let promedioCalificacion = 0;
+            for (let x = 0; x < traerCalificaciones.rows.length; x++) {
+                let calificacion = traerCalificaciones.rows[x];
+                promedioCalificacion += calificacion.calificacion;
+            }
+            promedioCalificacion = promedioCalificacion / traerCalificaciones.rows.length;
+
             clase.comentarios = traerComentarios.rows;
             clase.calificaciones = traerCalificaciones.rows;
             clase.profesor = traerProfesor.rows[0];
+            clase.promedioCalificacion = promedioCalificacion;
             if (traerUser) clase.user = traerUser.rows[0];
         }
 
@@ -150,19 +161,19 @@ servidor.get('/api/clases', async function(req, res){
 
 
 
-servidor.get('/api/clases-contratadas', async function(req, res){
 
-    try {
-        const {id} = req.params 
-        const clases = await pool.query('SELECT * FROM clases');
-      
+servidor.get('/api/recuperar-password', function(req, res) {
+    const { email } = req.query;
+    const code = "hola";
 
-      
-    } catch(error) {
-        res.status(500).send();
-    }
+    sgMail.setApiKey('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');
 
-})
+    const plantillaHtml = `
+        <h1>Hola! Tu codigo para ingresar es: ${code}</h1>
+    `;
+
+    sgMail.send({ from: "naveiralucia@gmail.com", to: email, html: plantillaHtml, subject: "Codigo para ingresar" })
+});
 
 
 

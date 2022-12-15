@@ -79,6 +79,11 @@ export default function RecipeReviewCard(props) {
         <Typography variant="body2" color="text.secondary">
           Frecuencia: {props.frecuencia}
         </Typography>
+
+        <Typography variant="body2" color="text.secondary">
+          Tipo de Clase: {props.tipoclase}
+        </Typography>
+
         <Typography variant="body2" color="text.secondary">
           Duracion: {props.duracion}
         </Typography>
@@ -89,6 +94,10 @@ export default function RecipeReviewCard(props) {
 
         <Typography variant="body2" color="text.secondary">
           Descripcion: {props.descripcion}
+        </Typography>
+
+        <Typography variant="body2" color="text.secondary">
+          Promedio calificaciones: {props.promedioCalificacion}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

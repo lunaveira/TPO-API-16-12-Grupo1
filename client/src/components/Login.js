@@ -281,6 +281,29 @@ export default function FormPropsTextFields(props) {
           >
         </a>
       </div>
+
+      <div className="flex justify-center items-center mt-6">
+        <a
+          href="#"
+          target="_blank"
+          className="
+            inline-flex
+            items-center
+            text-gray-700
+            font-medium
+            text-xs text-center
+          "
+        >
+          <span className="ml-2"
+            >Forgot password?
+            <a
+              href="/recuperar-password"
+              className="text-xs ml-2 text-indigo-500 font-semibold"
+              >Click here</a
+            ></span
+          >
+        </a>
+      </div>
     </div>
 
   );

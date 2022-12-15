@@ -25,19 +25,19 @@ import jwtDecode from "jwt-decode";
 import ListaMisClases from "./components/ListaMisClases";
 
 import MiPerfil from "./components/MiPerfil";
+import FormOlvidePassword from "./components/FormOlvidePassword";
+import FormCrearClase from "./components/FormCrearClase";
 
 
 
 function App() {
-
     const [isOpen, setIsOpen]= useState(false);
-
 
     const [isOpenRol, setIsOpenRol]= useState(false);
 
-
-
     const[rol, setRol] = useState('');
+
+    const [user, setUser] = useState({});
 
     async function verificarToken(token) {
       const peticion = await fetch('http://localhost:4444/api/validate-token', {headers: {token: token} } )
@@ -52,12 +52,8 @@ function App() {
        
        
          setRol(peticionDecode.userByID.rol);
-         
-
+         setUser(peticionDecode)
       }
-
-    
-
     }
 
     useEffect(function (){
@@ -100,8 +96,10 @@ function App() {
         <Route path="/dashboard-profesor" element={<DashboardProfesor/>} />
         <Route path="/dashboard-alumno" element={<DashboardAlumno/>} />
 
-        <Route path="/mis-clases" element={<ListaMisClases/>} />
+        <Route path="/mis-clases" element={<ListaMisClases user={user} />} />
         <Route path="/mi-perfil" element={<MiPerfil/>} />
+        <Route path="/recuperar-password" element={<FormOlvidePassword/>} />
+        <Route path="/crear-clases" element={<FormCrearClase/>} />
 
         
       </Routes>

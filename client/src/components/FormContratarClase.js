@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 
-export default function FormPropsTextFields() {
+export default function FormPropsTextFields(props) {
     return (
 
         <div
