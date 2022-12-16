@@ -2,7 +2,6 @@
 
 import RecipeReviewCard from "../components/CardsMaterias";
 import Bienvenida from "../components/CardBienvenida";
-import Filtros2 from "../components/Filtros2";
 import Filtros from "../components/Filtros";
 import { useEffect, useState } from "react";
 

@@ -19,7 +19,17 @@ export default function ButtonAppBar(props) {
     <div className="my- mr-2 ml-2 mt-2 flex items-center justify-between py-3 bg-indigo-400 rounded-lg">
 
       <div className="ml-2 flex space-x-5">
-        <Link to="/"><button className=" mr-1.5 mb-1 text-3xl text-white font-serif duration-300 hover:scale-105 hover:border-b-4 border-indigo-200 ">TusClases</button></Link>
+        {props.rol == '' && 
+          <button className=" mr-1.5 mb-1 text-3xl text-white font-serif duration-300 hover:scale-105 hover:border-b-4 border-indigo-200 ">TusClases</button>
+        }
+        {props.rol == 'alumno' && 
+         <Link to="/"><button className=" mr-1.5 mb-1 text-3xl text-white font-serif duration-300 hover:scale-105 hover:border-b-4 border-indigo-200 ">TusClases</button></Link>
+        }
+
+        {props.rol == 'profesor' && 
+          <Link to="/dashboard-profesor"><button className=" mr-1.5 mb-1 text-3xl text-white font-serif duration-300 hover:scale-105 hover:border-b-4 border-indigo-200 ">TusClases</button></Link>
+        }
+       
       </div>
 
 

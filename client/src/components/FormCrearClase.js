@@ -1,9 +1,10 @@
 import SubirImagenClase from "./SubirImagenClase";
+import {Link} from 'react-router-dom';
 
 export default function FormCrearClase() {
     return(
    
-<div className="max-w-2xl mx-auto">
+<div className="max-w-2xl mx-auto pt-3">
 
 	<form>
 		<div className="relative z-0 mb-6 w-full group">
@@ -40,6 +41,7 @@ export default function FormCrearClase() {
 		</div>
         <SubirImagenClase/>
 		<button type="submit" className="text-white bg-indigo-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+		<Link to="/dashboard-profesor"><button  className="text-indigo-600  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cancel</button></Link>
 	</form>
 
 	

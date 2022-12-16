@@ -162,7 +162,7 @@ export default function FormPropsTextFields(props) {
                       py-2
                       focus:outline-none focus:border-blue-400
                     "
-                    placeholder="Ingresa un horario de referencia para ser contactado"
+                    placeholder="Horario de referencia para ser contactado"
                   />
                 </div>
               </div>

@@ -47,11 +47,7 @@ export default function RecipeReviewCard(props) {
           </Avatar>
         }
 
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
+        
         title={props.nombreClase}
         subheader={props.materia}
         
