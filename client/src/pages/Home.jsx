@@ -63,7 +63,7 @@ export function Home(props) {
                 profesor={clase.profesor} usuario={clase.user} tipoclase={clase.tipoclase} 
                 frecuencia={clase.frecuencia} calificaciones={clase.calificaciones}
                 comentarios={clase.comentarios} duracion={clase.duracion}
-                nombreClase={clase.nombre} imagenClase={clase.imagenClase}
+                nombreClase={clase.nombre} imagen={clase.imagen}
                 avatar={clase.avatar} costo={clase.costo} promedioCalificacion={clase.promedioCalificacion} ></RecipeReviewCard>
             )
         })}
@@ -74,7 +74,7 @@ export function Home(props) {
                 profesor={clase.profesor} usuario={clase.user} tipoclase={clase.tipoclase} 
                 frecuencia={clase.frecuencia} calificaciones={clase.calificaciones}
                 comentarios={clase.comentarios} duracion={clase.duracion}
-                nombreClase={clase.nombre} imagenClase={clase.imagenClase}
+                nombreClase={clase.nombre} imagen={clase.imagen}
                 avatar={clase.avatar} costo={clase.costo} promedioCalificacion={clase.promedioCalificacion}  ></RecipeReviewCard>
             )
         })}

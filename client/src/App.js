@@ -88,7 +88,7 @@ function App() {
        <ButtonAppBar openLoginForm={openLoginForm} openRoles={openRoles} rol={rol} setRol={setRol}/>
       <Routes>
         <Route path="/" element={<Home rol={rol}/>} />
-        <Route path="/login" element={<Login setRol={setRol}/>} />
+        <Route path="/login" element={<Login setRol={setRol} setUser={setUser} />} />
         <Route path="/register-profesor" element={<RegisterP setRol={setRol}/>} />
         <Route path="/register-alumno" element={<RegisterA setRol={setRol}/>} />
         <Route path="/elegir-rol" element={<ElegirRol/>} />
@@ -102,7 +102,7 @@ function App() {
         <Route path="/mi-perfil-alumno" element={<MiPerfilAlumno/>} />
         <Route path="/mi-perfil-profesor" element={<MiPerfilProfesor/>} />
         <Route path="/recuperar-password" element={<FormOlvidePassword/>} />
-        <Route path="/crear-clases" element={<FormCrearClase/>} />
+        <Route path="/crear-clases" element={<FormCrearClase user={user} />} />
         <Route path="/hacer-comentarios" element={<FormHacerComentario/>} />
 
         

@@ -1,15 +1,9 @@
-export default function SubirImagenClase(){
+export default function SubirImagenClase({ handleChangeFile }){
     return(
        
 <div className="flex items-center justify-center p-12">
 
   <div className="mx-auto w-full max-w-[550px] bg-white">
-    <form
-      className="py-6 px-9"
-      action="https://formbold.com/s/FORM_ID"
-      method="POST"
-    >
-      
 
       <div className="mb-6 pt-4">
         <label className="mb-5 block text-xl font-semibold text-[#07074D]">
@@ -17,7 +11,7 @@ export default function SubirImagenClase(){
         </label>
 
         <div className="mb-8">
-          <input type="file" name="file" id="file" className="sr-only" />
+          <input  onChange={e => handleChangeFile(e.target.files[0])} type="file" name="file" id="file" className="sr-only" />
           <label
             for="file"
             className="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center"
@@ -39,15 +33,6 @@ export default function SubirImagenClase(){
         </div>
 
       </div>
-
-      <div>
-        <button
-          className="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
-        >
-          Send File
-        </button>
-      </div>
-    </form>
   </div>
 </div>
     );

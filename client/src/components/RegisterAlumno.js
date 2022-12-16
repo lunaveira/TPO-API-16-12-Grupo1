@@ -39,17 +39,10 @@ export default function FormPropsTextFields(props) {
       })})
 
       const jsonRes = await peticion.json();
-      localStorage.setItem('token.tusClases', jsonRes.token );
 
       if(jsonRes.token) {
-
         navigate('/login');
-
-        
       }
-
-      console.log(peticion);
-
   }; 
 
 

@@ -1,6 +1,34 @@
+import { useState } from 'react';
 import {Link} from 'react-router-dom';
 
 export default function FormPropsTextFields(props) {
+    const [email, setEmail] = useState("");
+    const [telefono, setTelefono] = useState("");
+    const [horario, setHorario] = useState("");
+    const [mensaje, setMensaje] = useState("");
+      
+    
+    async function handleSubmit(e) {
+      e.preventDefault();
+
+      const payload =  {
+        email,
+        telefono,
+        horario,
+        mensaje
+      }
+
+      await fetch('http://localhost:4444/api/contratar-clase', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+  
+      alert("Mensaje enviado al profesor")
+    }
+
     return (
 
         <div
@@ -29,7 +57,7 @@ export default function FormPropsTextFields(props) {
           </div>
   
           <div className="mt-10">
-            <form action="#">
+            <form handleSubmit={handleSubmit}>
              
   
               <div className="flex flex-col mb-5">
@@ -56,6 +84,8 @@ export default function FormPropsTextFields(props) {
                   </div>
   
                   <input
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
                     id="email"
                     type="email"
                     name="email"
@@ -105,6 +135,8 @@ export default function FormPropsTextFields(props) {
                     id="telefono"
                     type="telefono"
                     name="telefono"
+                    value={telefono}
+                    onChange={e => setTelefono(e.target.value)}
                     className="
                       text-sm
                       placeholder-gray-500
@@ -151,6 +183,8 @@ export default function FormPropsTextFields(props) {
                     id="horario"
                     type="horario"
                     name="horario"
+                    value={horario}
+                    onChange={e => setHorario(e.target.value)}
                     className="
                       text-sm
                       placeholder-gray-500
@@ -197,6 +231,8 @@ export default function FormPropsTextFields(props) {
                     id="mensaje"
                     type="mensaje"
                     name="mensaje"
+                    value={mensaje}
+                    onChange={e => setMensaje(e.target.value)}
                     className="
                       text-sm
                       placeholder-gray-500
@@ -253,7 +289,10 @@ export default function FormPropsTextFields(props) {
                 </button>
               </div>
 
-              <div className="flex w-full">
+             
+            </form>
+
+            <div className="flex w-full">
               <Link to="/" ><button
                 type="submit"
                 className="
@@ -279,7 +318,6 @@ export default function FormPropsTextFields(props) {
               </button>
               </Link>
             </div>
-            </form>
           </div>
         </div>
        

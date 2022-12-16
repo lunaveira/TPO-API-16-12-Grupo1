@@ -17,7 +17,6 @@ export default function FormPropsTextFields(props) {
   async function handleSubmit(event){
       event.preventDefault();
       const peticion = await fetch('http://localhost:4444/api/register', {method: "POST", headers: {'Content-Type': 'application/json'} , body: JSON.stringify ({
-  
         nombre: name, 
         apellido: surname, 
         email: email, 
@@ -28,10 +27,8 @@ export default function FormPropsTextFields(props) {
       })})
 
       const jsonRes = await peticion.json();
-      localStorage.setItem('token.tusClases', jsonRes.token );
 
       if(jsonRes.token) {
-
         navigate('/login');
       }
 

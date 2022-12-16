@@ -37,6 +37,7 @@ export default function FormPropsTextFields(props) {
         const peticionDecode = await peticion2.json();
 
         props.setRol(peticionDecode.userByID.rol);
+        props.setUser(peticionDecode)
 
         if(peticionDecode.userByID.rol == 'alumno') {
 

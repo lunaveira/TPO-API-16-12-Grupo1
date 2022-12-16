@@ -5,11 +5,17 @@ const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 const { json } = require('express');
 const sgMail = require('@sendgrid/mail');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 
 const servidor = express();
-servidor.use(express.json());
+servidor.use(express.json({limit: '50mb'}));
+servidor.use(express.urlencoded({limit: '50mb'}));
 servidor.use(cors());
+
+sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
 
 function jwtGenerator(id){
@@ -166,8 +172,6 @@ servidor.get('/api/recuperar-password', function(req, res) {
     const { email } = req.query;
     const code = "hola";
 
-    sgMail.setApiKey('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');
-
     const plantillaHtml = `
         <h1>Hola! Tu codigo para ingresar es: ${code}</h1>
     `;
@@ -175,7 +179,44 @@ servidor.get('/api/recuperar-password', function(req, res) {
     sgMail.send({ from: "naveiralucia@gmail.com", to: email, html: plantillaHtml, subject: "Codigo para ingresar" })
 });
 
+servidor.post('/api/crear-clase', async function(req,res) {
+    try {
+        const {			name,
+            materia,
+            frecuencia,
+            duracion,
+            tipo,
+            costo,
+            descripcion,
+            image, profesorId} = req.body;
+    
+        await pool.query(`
+            INSERT INTO clases(nombre, materia, frecuencia, duracion, idProfesor, costo, descripcion, tipoClase, imagen)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
+        `, [name, materia, frecuencia, duracion, profesorId, costo, descripcion, tipo, image]);
 
+        res.sendStatus(200);
+    } catch(err) {
+        console.log(err.message)
+        res.sendStatus(500);
+    }
+});
+
+servidor.post('/api/contratar-clase', async (req, res) => {
+    const { email, telefono, horario, mensaje } = req.body;
+
+    try {
+        const plantillaHtml = `
+            <h1>Hola! Tu codigo para ingresar es: ${code}</h1>
+        `;
+
+        sgMail.send({ from: "naveiralucia@gmail.com", to: email, html: plantillaHtml, subject: "Codigo para ingresar" })
+
+        res.sendStatus(200);
+    } catch(err) {
+        res.sendStatus(500);
+    }
+});
 
 
 

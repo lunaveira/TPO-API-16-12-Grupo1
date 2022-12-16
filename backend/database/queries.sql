@@ -18,7 +18,8 @@ CREATE TABLE clases(
   costo money,
   descripcion varchar(250),
   tipoClase varchar(50),
-  id serial primary key
+  id serial primary key, 
+  imagen text
 );
 
 CREATE TABLE calificacion(
