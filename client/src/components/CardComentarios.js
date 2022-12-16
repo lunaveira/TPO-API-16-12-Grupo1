@@ -23,7 +23,11 @@ export default function CardComentarios(props) {
           <Avatar sx={{ bgcolor: blueGrey[500] }} aria-label="recipe">
             <img className="w-full h-full object-cover" src = {props.imagen} alt="avatar" />
           </Avatar>
+
+         
         }
+
+
         
         <Typography variant="h5" component="div">
           {props.nombre}

@@ -7,7 +7,7 @@ export default function SubirImagenClase({ handleChangeFile }){
 
       <div className="mb-6 pt-4">
         <label className="mb-5 block text-xl font-semibold text-[#07074D]">
-          Upload File
+          Subir imagen de la clase
         </label>
 
         <div className="mb-8">

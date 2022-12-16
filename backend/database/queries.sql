@@ -33,7 +33,8 @@ CREATE TABLE comentario(
     id serial primary key,
     idUser int references users(id),
     comentario varchar(250),
-    idClase int references clases(id)
+    idClase int references clases(id),
+    aceptado boolean
 );
 
 CREATE TABLE alumno (

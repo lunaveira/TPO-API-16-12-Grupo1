@@ -9,12 +9,13 @@ La aplicación realizada por las alumnas Gacetua, Antonella Daiana y Naveira, Lu
 
 # Tecnologías y lenguajes presentes en el trabajo sobre el backend y frontend
 Html, Css, React Js, Node Js y Javascript. La base de datos utilizada es: PostgresSQL. Estas tecnologías y lenguajes fueron puestas en práctica sobre Visual Studio Code.
-Para el envio de email se utilizo SendGrid y para la subida de imagenes se uso ........
+Para el envio de email se utilizo SendGrid y para la subida de imagenes se guardo base64 en la base de datos. Esta tecnologia consiste en convertir imagenes en texto.
 
 # ¿Cómo correr el programa? 
 El frontend y el backend se encuentran unidos en el mismo archivo, pero en distintas carpetas. Por lo que para correr el programa es necesario dividir la terminal en dos partes. 
 En la primera terminal ingresar "cd backend" para pararse en la carpeta del backend, y en la segunda terminal ingresar "cd client" para pararse en la carpeta del front.
 Luego en ambas terminales debe ingresarse el comando npm install y luego npm start (el back tambien se inicia haciendo npm start).
+Para hacer uso de la bases de datos, se debe seguir el orden de las querys que se encuentran en el archivo queries.js. Esto puede hacerse en un PostBird o en un PSQL (ingresando con los datos que se encuentran en database.js). IMPORTANTE: SI NO SE REALIZA ESTE PASO EL BACKEND NO VA A FUNCIONAR!!.
 
 # Requerimientos generales
 La aplicación debe ser responsive. La aplicación deberá desarrollarse utilizando los siguientes lenguajes y librerías obligatorias: HTML/CSS, React, JavaScript y NodeJS La base de datos a utilizar es opción del grupo pudiendo escogerse entre SQL (MySql, SqlServer, Postgress) y NO SQL (MongoDB)
@@ -33,13 +34,37 @@ Si el usuario ya tenia una cuenta pero se olvido su contraseña, va a poder ir a
 Una vez logueado con el rol alumno, este mismo va a poder ver todas las clases existentes (al igual que en el sitio institucional) pero va a tener la posibilidad de contratarlas. Para eso debe seleccionar el carrito de compras que aparece en la esquina inferior izquierda de cada clase. Esto llevara al usuario a una pagina con un formulario para completar y enviarle un email al profesor con dicha contratacion, con la finalidad de que ambos puedan ponerse en contacto.
 Ademas, el alumno podra ver todas las clases que contrato desde la seccion "mis clases" en el navegador, y ahi podra cambiarle el estado a las clases (cancelada / finalizada) asi como tambien dejar un comentario y una calificacion.
 
-Tambien va a poder acceder a su perfil para modificar sus datos personales y subir su foto de perfil.
 
 # Rol profesor
 Una vez logueado con el rol profesor, este mismo va a poder ver todas las clases creadas por el, asi como tambien contara con un boton de "crear clase" que lo redireccionara a un formulario para completar con los datos de la nueva clase creada, y poder subir una imagen que acompañe. 
 El profesor tambien podra acceder desde el navegador a sus contrataciones, donde tendra un listado de los alumnos que contrataron cada clase y va a poder cambiar el estado de esas mismas contrataciones (aceptada / finalizada / cancelada). Ademas, contara con una seccion adicional donde podra ver los comentarios de las clases y decidira si publicar o bloquear cada comentario (en el caso de bloquear debera completar un formulario con el motivo del bloqueo). 
 Con respecto a sus clases ya creadas, va a poder eliminarlas o modificarlas seleccionando los botones correspondientes que se encuentran en cada clase.
 
-Tambien va a poder acceder a su perfil para modificar sus datos personales y subir su foto de perfil.
 
 # Endpoints
+Los endpoints utilizados son: 
+LOGIN: '/api/login'  PETICION: POST   RECIBE: body: {email, password }
+
+REGISTER: '/api/register'  PETICION: POST  RECIBE: body: {nombre, apellido, email, password, titulo, experiencia, primaria, secundaria, terciario, universitario, fechaNac, rol }
+
+VALIDACION DE TOKEN: '/api/validate-token' PETICION: GET 
+
+USUARIOS POR ID: '/api/usuarios/:id'  PETICION: GET  RECIBE: params: {id}
+
+OBTENER CLASES: '/api/clases'   PETICION: GET   
+
+RECUPERAR PASSWORD: '/api/recuperar-password'  PETICION: GET   RECIBE: query: {email}
+
+CREAR CLASE: '/api/crear-clase'   PETICION: POST   RECIBE: body: {name,
+            materia,
+            frecuencia,
+            duracion,
+            tipo,
+            costo,
+            descripcion,
+            image, profesorId}
+
+CONTRATAR CLASE: '/api/contratar-clase'  PETICION: POST   RECIBE: body: { email, telefono, horario, mensaje } 
+
+ELIMINAR CLASE: '/api/eliminar-clase/:id'  PETICION: DELETE  RECIBE: params: {id}
+

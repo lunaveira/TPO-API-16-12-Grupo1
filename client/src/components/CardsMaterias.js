@@ -15,6 +15,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {Link} from 'react-router-dom';
 import CardComentarios from './CardComentarios';
 
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+
 
 
 const ExpandMore = styled((props) => {
@@ -34,6 +36,17 @@ export default function RecipeReviewCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const handleClick = (id) => { 
+
+    fetch('http://localhost:4444/api/eliminar-clase/' + id,  {
+      method: 'DELETE'
+
+    })
+
+  };
+
+
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -99,6 +112,10 @@ export default function RecipeReviewCard(props) {
         {props.rol == 'alumno' && <Link to="/contratar-clases"><AddShoppingCartIcon  /></Link> }
          
         </IconButton>
+
+        <IconButton aria-label="eliminar clase" >
+          {props.rol == 'profesor' && <button onClick={ () => handleClick(props.id) }> Eliminar clase </button> }
+        </IconButton>
        
        
         <ExpandMore
@@ -114,7 +131,13 @@ export default function RecipeReviewCard(props) {
         <CardContent>
           <Typography paragraph>Comentarios</Typography>
       
-          {props.comentarios.map(function (comentario){
+          {props?.comentarios?.filter(function(comentario) {
+
+            return comentario.aceptado;
+
+
+
+          }).map(function (comentario){
             return (
 
               <CardComentarios calificacion={props.calificaciones.find(function(calificacion) { return calificacion.iduser === comentario.iduser })} nombre={comentario.nombre} imagen={comentario.imagen}

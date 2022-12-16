@@ -6,8 +6,8 @@ const jsonwebtoken = require('jsonwebtoken');
 const { json } = require('express');
 const sgMail = require('@sendgrid/mail');
 const dotenv = require('dotenv');
-
-dotenv.config();
+const util = require('./util');
+const nodemailer = require('nodemailer');
 
 
 const servidor = express();
@@ -15,9 +15,18 @@ servidor.use(express.json({limit: '50mb'}));
 servidor.use(express.urlencoded({limit: '50mb'}));
 servidor.use(cors());
 
-sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
 
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    secure: true,
+    port: 465,
+    auth: {
+        user: 'naveiralucia@gmail.com',
+        pass: 'ayvqzmjdttjekpmi'
+    }
+});
 function jwtGenerator(id){
 
     const payload = {user: {id}}
@@ -111,13 +120,30 @@ servidor.get('/api/usuarios/:id', async function(req, res){
         userByID = userByID.rows[0];
         let profeOAlumno = null;
         let clases = null;
+        let clasesContratadas = null;
+        
+        
 
         if (userByID.rol == 'profesor') {
             profeOAlumno = await pool.query('SELECT * FROM profesor WHERE idUser = $1', [userByID.id])
             clases = await pool.query('SELECT * FROM clases WHERE idProfesor = $1', [profeOAlumno.rows[0].id]);
+            clasesContratadas = await pool.query('SELECT * FROM clases_contratadas WHERE idProfesor = $1', [profeOAlumno.rows[0].id]);
+
+            for (let i = 0; i < clasesContratadas.rows.length; i++) {
+                const fetchAlumno = await pool.query('SELECT * FROM alumno WHERE id = $1', [clasesContratadas.rows[i].idalumno])
+                const fetchClase = await pool.query('SELECT * FROM clases WHERE id = $1', [clasesContratadas.rows[i].idclase])
+                const fetchUserContratante = await pool.query('SELECT * FROM users WHERE id = $1', [fetchAlumno.rows[i].iduser])
+           
+                clasesContratadas.rows[i].alumno = fetchAlumno.rows[0]
+                clasesContratadas.rows[i].clase = fetchClase.rows[0]
+                clasesContratadas.rows[i].user = fetchUserContratante.rows[0]
+               
+            }
+           
         } else if(userByID.rol == 'alumno') {
             profeOAlumno = await pool.query('SELECT * FROM alumno WHERE idUser = $1', [userByID.id]);
             clases = await pool.query('SELECT * FROM clases_contratadas WHERE idAlumno = $1', [profeOAlumno.rows[0].id]);
+         
 
             for (let i = 0; i < clases.rows.length; i++) {
                 const fetchProfesor = await pool.query('SELECT * FROM profesor WHERE id = $1', [clases.rows[i].idprofesor])
@@ -125,9 +151,16 @@ servidor.get('/api/usuarios/:id', async function(req, res){
                 clases.rows[i].profesor = fetchProfesor.rows[0]
                 clases.rows[i].clase = fetchClase.rows[0]
             }
+
+
+            
         }
 
-        res.json({ userByID, profeOAlumno: profeOAlumno.rows[0], clases: clases.rows });
+        const payload = { userByID, profeOAlumno: profeOAlumno.rows[0], clases: clases.rows}
+        if(clasesContratadas) payload.clasesContratadas = clasesContratadas
+        
+
+        res.json(payload);
     } catch(error) {
         res.status(500).send();
     }
@@ -168,16 +201,21 @@ servidor.get('/api/clases', async function(req, res){
 
 
 
-servidor.get('/api/recuperar-password', function(req, res) {
+servidor.get('/api/recuperar-password', async function(req, res) {
     const { email } = req.query;
     const code = "hola";
 
-    const plantillaHtml = `
-        <h1>Hola! Tu codigo para ingresar es: ${code}</h1>
-    `;
+    await transporter.sendMail({
+        from: 'naveiralucia@gmail.com',
+        to: email,
+        subject: ' codigo de recuperacion',
+        html: '<p>hola</p>'
+    })
 
-    sgMail.send({ from: "naveiralucia@gmail.com", to: email, html: plantillaHtml, subject: "Codigo para ingresar" })
+
 });
+    
+
 
 servidor.post('/api/crear-clase', async function(req,res) {
     try {
@@ -203,20 +241,62 @@ servidor.post('/api/crear-clase', async function(req,res) {
 });
 
 servidor.post('/api/contratar-clase', async (req, res) => {
-    const { email, telefono, horario, mensaje } = req.body;
 
     try {
-        const plantillaHtml = `
-            <h1>Hola! Tu codigo para ingresar es: ${code}</h1>
-        `;
 
-        sgMail.send({ from: "naveiralucia@gmail.com", to: email, html: plantillaHtml, subject: "Codigo para ingresar" })
+        const { email, telefono, horario, mensaje } = req.body;
+        const plantillaHtml = `
+                <h1>Datos de la nueva contratacion
+                Email usuario: ${email}
+                Telefono: ${telefono}
+                Horario: ${horario}
+                Mensaje adicional: ${mensaje}</h1>
+            `;
+    
+        
+    
+        await transporter.sendMail({
+            from: 'naveiralucia@gmail.com',
+            to: email,
+            subject: 'Nueva contratacion!',
+            html: plantillaHtml
+        })
 
         res.sendStatus(200);
-    } catch(err) {
+    
+
+    } catch(err)  {
         res.sendStatus(500);
+        console.log(err.message)
+        
     }
+
+   
 });
+
+servidor.delete('/api/eliminar-clase/:id', async (req, res) => {
+    const {id} = req.params
+
+    try {
+
+        const eliminar = await pool.query('DELETE FROM clases WHERE id = $1', [id])
+
+        res.sendStatus(200);
+
+
+    } catch (err) {
+
+        res.sendStatus(500);
+        console.log(err.message)
+        
+
+    }
+
+
+
+
+
+} )
 
 
 

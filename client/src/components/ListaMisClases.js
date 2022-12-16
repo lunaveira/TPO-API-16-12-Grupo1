@@ -4,11 +4,9 @@ import FormHacerComentario from "./FormHacerComentario";
 import BasicRating from "./Calificar";
 import {Link} from 'react-router-dom';
 
-export default function ListaMisClases(props) {
-    useEffect(() => {
-      console.log(props.user);
-    }, [props.user])
 
+export default function ListaMisClases(props) {
+ 
 
     const [isOpen, setIsOpen]= useState(false);
 
@@ -17,10 +15,21 @@ export default function ListaMisClases(props) {
         
     
       }
+
+       useEffect(function() {console.log(props.user.clasesContratadas);}, [props.user])
+
+      
   
     return(
 
-        <div>
+      props.user?.clasesContratadas?.map(function (clase){
+
+       // console.log(props.user);
+       
+       
+        return(
+
+          <div>
               <table className="min-w-full table-auto">
                 <thead className="justify-between">
                   <tr className="bg-gray-800">
@@ -50,22 +59,18 @@ export default function ListaMisClases(props) {
                 
                   <tr className="bg-white border-4 border-gray-200">
                     <td className="px-16 py-2 flex flex-row items-center">
-                    <img
-                          className="h-8 w-8 rounded-full object-cover "
-                          src="https://randomuser.me/api/portraits/men/38.jpg"
-                          alt=""
-                        />
+                    
                     </td>
                     <td>
-                      <span className="text-center ml-2 font-semibold">Brett Castillo</span>
+                      <span className="text-center ml-2 font-semibold">{clase?.user?.nombre}c</span>
                     </td>
                     <td className="px-16 py-2">
                       
 
-                      <span>Clases de React</span>
+                      <span>{clase?.clase?.nombre}</span>
                     </td>
                     <td className="px-16 py-2">
-                      <span>Informatica</span>
+                      <span>{clase?.clase?.materia}</span>
                     </td>
                     <td className="px-16 py-2">
                     <BasicSelect/>
@@ -85,6 +90,12 @@ export default function ListaMisClases(props) {
               
             </div>
 
-    );
+        );
+      }
+
+        
+
+    ));
+    
 }
 

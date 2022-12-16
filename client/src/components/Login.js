@@ -28,7 +28,7 @@ export default function FormPropsTextFields(props) {
       const jsonRes = await peticion.json();
       localStorage.setItem('token.tusClases', jsonRes.token );
       const tokenDecode = jwtDecode(jsonRes.token);
-      
+      console.log(jsonRes.token);
       
 
       if(jsonRes.token) {
@@ -51,9 +51,6 @@ export default function FormPropsTextFields(props) {
 
        
       }
-
-
-      
       
 
   }; 

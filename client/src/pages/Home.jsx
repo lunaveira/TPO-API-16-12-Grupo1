@@ -7,29 +7,16 @@ import { useEffect, useState } from "react";
 
 
 
-
-
 export function Home(props) {
-    const [clases, setClases] = useState([]);
+   
     const [filteredClases, setFilteredClases] = useState([]);
     const [searchValue, setSearchValue] = useState("")
     const [searchValueTipo, setSearchValueTipo] = useState("")
     const [searchValueFrec, setSearchValueFrec] = useState("")
     const [calorieValue, setCalorieValue] = useState(0)
 
-    async function peticion(){
-        const pet = await fetch('http://localhost:4444/api/clases')
-        const peticionDecode = await pet.json();
-        setClases(peticionDecode.clases);
-
-    }
-
-    useEffect(function(){
-        peticion();
-    }, [])
-
     useEffect(function() {
-        setFilteredClases([...clases].filter(function(clase) {
+        setFilteredClases([...props.clases].filter(function(clase) {
             return searchValue && new RegExp(searchValue, "i").test(clase.materia) 
             || searchValueTipo && new RegExp(searchValueTipo, "i").test(clase.tipoclase) ||
             searchValueFrec && new RegExp(searchValueFrec, "i").test(clase.frecuencia) ||
@@ -67,7 +54,7 @@ export function Home(props) {
                 avatar={clase.avatar} costo={clase.costo} promedioCalificacion={clase.promedioCalificacion} ></RecipeReviewCard>
             )
         })}
-        {(clases != "" && !searchValue && !searchValueTipo && !searchValueFrec && !calorieValue) && clases.map(function (clase){
+        {(props.clases != "" && !searchValue && !searchValueTipo && !searchValueFrec && !calorieValue) && props.clases.map(function (clase){
             return(
                 <RecipeReviewCard rol={props.rol}
                 descripcion = {clase.descripcion} materia={clase.materia} 

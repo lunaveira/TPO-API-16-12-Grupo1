@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import {Link} from 'react-router-dom';
 
 export default function FormOlvidePassword() {
     const [email, setEmail] = useState("");
@@ -32,6 +33,8 @@ export default function FormOlvidePassword() {
                
             </div>
         </form>
+
+        <Link to="/"><button  className="w-full py-3 font-medium text-indigo  hover:bg-indigo-500 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"> Cancel </button></Link>
     </div>
     
 </body>

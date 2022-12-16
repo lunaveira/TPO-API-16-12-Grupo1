@@ -41,6 +41,22 @@ function App() {
 
     const [user, setUser] = useState({});
 
+    const [clases, setClases] = useState([]);
+
+
+    
+    async function peticion(){
+      const pet = await fetch('http://localhost:4444/api/clases')
+      const peticionDecode = await pet.json();
+      setClases(peticionDecode.clases);
+
+  }
+
+  useEffect(function(){
+      peticion();
+  }, [])
+
+
     async function verificarToken(token) {
       const peticion = await fetch('http://localhost:4444/api/validate-token', {headers: {token: token} } )
 
@@ -87,7 +103,7 @@ function App() {
     <BrowserRouter>
        <ButtonAppBar openLoginForm={openLoginForm} openRoles={openRoles} rol={rol} setRol={setRol}/>
       <Routes>
-        <Route path="/" element={<Home rol={rol}/>} />
+        <Route path="/" element={<Home rol={rol} clases={clases}/>} />
         <Route path="/login" element={<Login setRol={setRol} setUser={setUser} />} />
         <Route path="/register-profesor" element={<RegisterP setRol={setRol}/>} />
         <Route path="/register-alumno" element={<RegisterA setRol={setRol}/>} />
@@ -95,10 +111,10 @@ function App() {
         <Route path="/contratar-clases" element={<FormPropsTextFields/>} />
         
   
-        <Route path="/dashboard-profesor" element={<DashboardProfesor/>} />
+        <Route path="/dashboard-profesor" element={<DashboardProfesor rol ={rol} clases={clases} user={user}/>} />
         <Route path="/dashboard-alumno" element={<DashboardAlumno/>} />
 
-        <Route path="/mis-clases" element={<ListaMisClases user={user} />} />
+        <Route path="/mis-clases" element={<ListaMisClases user={user} clases={clases} />} />
         <Route path="/mi-perfil-alumno" element={<MiPerfilAlumno/>} />
         <Route path="/mi-perfil-profesor" element={<MiPerfilProfesor/>} />
         <Route path="/recuperar-password" element={<FormOlvidePassword/>} />

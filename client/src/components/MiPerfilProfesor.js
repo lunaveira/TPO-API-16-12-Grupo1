@@ -1,6 +1,6 @@
 import Calendario from "./Calendario";
 
-export default function MiPerfilProfesor() {
+export default function MiPerfilProfesor({ handleChangeFile }) {
     return(
 
         <div className="flex justify-between container mx-auto">
@@ -16,7 +16,7 @@ export default function MiPerfilProfesor() {
         </div> 
         <label className="block pt-2">
             <span className="sr-only t-2">Choose profile photo</span>
-            <input type="file" className="w-full text-sm text-slate-500
+            <input onChange={e => handleChangeFile(e.target.files[0])} type="file" className="w-full text-sm text-slate-500
             file:mr-4 file:py-2 file:px-4
             file:rounded-full file:border-0
             file:text-sm file:font-semibold

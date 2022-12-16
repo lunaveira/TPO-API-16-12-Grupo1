@@ -57,7 +57,7 @@ export default function FormPropsTextFields(props) {
           </div>
   
           <div className="mt-10">
-            <form handleSubmit={handleSubmit}>
+            <form onClick={handleSubmit}>
              
   
               <div className="flex flex-col mb-5">
