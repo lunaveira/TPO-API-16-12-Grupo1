@@ -28,6 +28,7 @@ import MiPerfilAlumno from "./components/MiPerfilAlumno";
 import FormOlvidePassword from "./components/FormOlvidePassword";
 import FormCrearClase from "./components/FormCrearClase";
 import MiPerfilProfesor from "./components/MiPerfilProfesor";
+import FormHacerComentario from "./components/FormHacerComentario";
 
 
 
@@ -102,6 +103,7 @@ function App() {
         <Route path="/mi-perfil-profesor" element={<MiPerfilProfesor/>} />
         <Route path="/recuperar-password" element={<FormOlvidePassword/>} />
         <Route path="/crear-clases" element={<FormCrearClase/>} />
+        <Route path="/hacer-comentarios" element={<FormHacerComentario/>} />
 
         
       </Routes>

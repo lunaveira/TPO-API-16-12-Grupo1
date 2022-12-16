@@ -12,8 +12,6 @@ import Typography from '@mui/material/Typography';
 import {  blueGrey } from '@mui/material/colors';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-
 import {Link} from 'react-router-dom';
 import CardComentarios from './CardComentarios';
 

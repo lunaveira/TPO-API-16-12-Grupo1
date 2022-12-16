@@ -2,6 +2,7 @@ import BasicSelect from "./SelectEstadoClase";
 import { useState, useEffect } from "react";
 import FormHacerComentario from "./FormHacerComentario";
 import BasicRating from "./Calificar";
+import {Link} from 'react-router-dom';
 
 export default function ListaMisClases(props) {
     useEffect(() => {
@@ -72,9 +73,9 @@ export default function ListaMisClases(props) {
         
                     <td className="px-16 py-2">
 
-                    <button onClick={openFormComentar} className="bg-indigo-500 text-white px-4 py-2 border rounded-md hover:bg-white hover:border-indigo-500 hover:text-black ">
-                        Open Link
-                      </button>
+                    <Link to="/hacer-comentarios"><button className="bg-indigo-500 text-white px-4 py-2 border rounded-md hover:bg-white hover:border-indigo-500 hover:text-black ">
+                        Comenta esta clase!
+                      </button></Link>
                       
                     </td>
                   </tr>

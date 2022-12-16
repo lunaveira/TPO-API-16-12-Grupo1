@@ -29,7 +29,7 @@ export default function MiPerfilProfesor() {
         <span className="text-md font-semibold text-indigo-800">
             Nombre
         </span>
-        <input className="w-full bg-transparent p-0 text-sm  text-gray-500 focus:outline-none" id="name" type="text" placeholder="Your name" />
+        <input className="w-full bg-transparent p-0 text-sm  text-gray-500 focus:outline-none" id="nombre" type="text" placeholder="Tu nombre" />
         </label>
         
        
@@ -37,7 +37,7 @@ export default function MiPerfilProfesor() {
         <span className="text-md font-semibold text-indigo-800">
             Apellido
         </span>
-        <input className="w-full bg-transparent p-0 text-sm  text-gray-500 focus:outline-none" id="name" type="text" placeholder="Your name" />
+        <input className="w-full bg-transparent p-0 text-sm  text-gray-500 focus:outline-none" id="apellido" type="text" placeholder="Tu apellido" />
         </label>
        
     
@@ -45,7 +45,7 @@ export default function MiPerfilProfesor() {
         <span className="text-md font-semibold text-indigo-800" >
             Email
         </span>
-        <input className="w-full   p-0 text-sm border-none bg-transparent text-gray-500 focus:outline-none" id="name" type="text" placeholder="Write Your Bio" />
+        <input className="w-full   p-0 text-sm border-none bg-transparent text-gray-500 focus:outline-none" id="email" type="email" placeholder="Tu email" />
         </label>
     
 
@@ -53,7 +53,7 @@ export default function MiPerfilProfesor() {
         <span className="text-md font-semibold text-indigo-800" >
             Titulo
         </span>
-        <input className="w-full   p-0 text-sm border-none bg-transparent text-gray-500 focus:outline-none" id="name" type="text" placeholder="Write Your Bio" />
+        <input className="w-full   p-0 text-sm border-none bg-transparent text-gray-500 focus:outline-none" id="titulo" type="text" placeholder="Tu titulo obtenido mas reciente (si tenes)" />
         </label>
     
 
@@ -61,15 +61,13 @@ export default function MiPerfilProfesor() {
         <span className="text-md font-semibold text-indigo-800" >
            Experiencia
         </span>
-        <input className="w-full   p-0 text-sm border-none bg-transparent text-gray-500 focus:outline-none" id="name" type="text" placeholder="Write Your Bio" />
+        <input className="w-full   p-0 text-sm border-none bg-transparent text-gray-500 focus:outline-none" id="experiencia" type="text" placeholder="Breve comentario sobre tu experiencia laboral" />
         </label>
     
 
     
-      
-    
         <button className="mt-5 border-2 px-5 py-2 rounded-lg border-indigo-600 border-b-4 font-black translate-y-2 border-l-4">
-        Submit
+            Aceptar
         </button>
         </form>
         </div>
