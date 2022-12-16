@@ -3,6 +3,7 @@ import FormCrearClase from "../components/FormCrearClase"
 import SubirImagenClase from "../components/SubirImagenClase"
 import {Link} from 'react-router-dom';
 import VerComentarios from "../components/VerComentarios";
+import MiPerfil from "../components/MiPerfilAlumno";
 
 
 export function DashboardProfesor() {
@@ -13,6 +14,8 @@ export function DashboardProfesor() {
        
 
         <Link to="/crear-clases"><BotonAgregarClases/> </Link>
+
+     
 
    
 

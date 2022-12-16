@@ -45,7 +45,7 @@ export default function ButtonAppBar(props) {
           <div>
              <Link to="/"><button onClick={logOut} className="mx-1 bg-indigo-400 p-2 font-bold text-white"  >Log out</button></Link>
              <Link to="/mis-clases"><button className="mx-1 bg-indigo-400 p-2 font-bold text-white"  >Mis clases</button></Link>
-             <Link to="/mi-perfil"><button className="mx-1 bg-indigo-400 p-2 font-bold text-white"  >Mi perfil</button></Link>
+             <Link to="/mi-perfil-alumno"><button className="mx-1 bg-indigo-400 p-2 font-bold text-white"  >Mi perfil</button></Link>
           </div>
           }
 
@@ -54,7 +54,7 @@ export default function ButtonAppBar(props) {
           <div>
             <Link to="/"><button onClick={logOut} className="mx-1 bg-indigo-400 p-2 font-bold text-white"  >Log out</button></Link>
             <Link to="/mis-clases"><button className="mx-1 bg-indigo-400 p-2 font-bold text-white"  >Contrataciones</button></Link>
-             <Link to="/mi-perfil"><button className="mx-1 bg-indigo-400 p-2 font-bold text-white"  >Mi perfil</button></Link>
+             <Link to="/mi-perfil-profesor"><button className="mx-1 bg-indigo-400 p-2 font-bold text-white"  >Mi perfil</button></Link>
           </div>
 
           }

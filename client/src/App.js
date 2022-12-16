@@ -24,9 +24,10 @@ import FormPropsTextFields from "../src/components/FormContratarClase";
 import jwtDecode from "jwt-decode";
 import ListaMisClases from "./components/ListaMisClases";
 
-import MiPerfil from "./components/MiPerfil";
+import MiPerfilAlumno from "./components/MiPerfilAlumno";
 import FormOlvidePassword from "./components/FormOlvidePassword";
 import FormCrearClase from "./components/FormCrearClase";
+import MiPerfilProfesor from "./components/MiPerfilProfesor";
 
 
 
@@ -97,7 +98,8 @@ function App() {
         <Route path="/dashboard-alumno" element={<DashboardAlumno/>} />
 
         <Route path="/mis-clases" element={<ListaMisClases user={user} />} />
-        <Route path="/mi-perfil" element={<MiPerfil/>} />
+        <Route path="/mi-perfil-alumno" element={<MiPerfilAlumno/>} />
+        <Route path="/mi-perfil-profesor" element={<MiPerfilProfesor/>} />
         <Route path="/recuperar-password" element={<FormOlvidePassword/>} />
         <Route path="/crear-clases" element={<FormCrearClase/>} />
 
